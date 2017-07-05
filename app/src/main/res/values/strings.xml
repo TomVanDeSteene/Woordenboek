@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">DictionaryApp</string>
+
+    <string-array name="words">
+        <item>Voetbal</item>
+        <item>Computer</item>
+        <item>Schoen</item>
+        <item>Paard</item>
+        <item>Bier</item>
+        <item>Boom</item>
+        <item>Baard</item>
+    </string-array>
+</resources>
