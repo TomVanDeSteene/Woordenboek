@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DictionaryActivity">
-        </activity>
+        <activity android:name=".DictionaryActivity"
+            android:configChanges="orientation|screenSize"/>
+
         <activity android:name=".AddWordActivity" />
         <activity android:name=".StartActivity">
             <intent-filter>

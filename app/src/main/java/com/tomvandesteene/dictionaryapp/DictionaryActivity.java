@@ -1,6 +1,7 @@
 package com.tomvandesteene.dictionaryapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class DictionaryActivity extends SimpleActivity {
     private Map<String, String> dictionary;
     private MediaPlayer mp;
     private int points;
+    private int highScore;
     private List<String> words;
 
 
@@ -96,14 +98,26 @@ public class DictionaryActivity extends SimpleActivity {
             String correctDefn = dictionary.get(theWord);
             if (defnClicked.equals(correctDefn)){
                 points++;
-                toast("AWESOME! Your points are: " + points);
+                if (points > highScore){
+                    highScore = points;
+
+                    SharedPreferences prefs = getSharedPreferences("myprefs", MODE_PRIVATE);
+                    SharedPreferences.Editor prefsEditor = prefs.edit();
+                    prefsEditor.putInt("highscore", highScore);
+                    prefsEditor.apply();
+                }
+                toast("AWESOME! Score = " + points + ", hi = " + highScore);
             } else {
                 points--;
-                toast(":-( LOLOLOL duuuh! Your points are: " + points);
+                toast(":-( LOL! Score = " + points + ", hi = " + highScore);
             }
             chooseWords();
             }
         );
+        // Load the high score
+        SharedPreferences prefs = getSharedPreferences("myprefs", MODE_PRIVATE);
+        highScore = prefs.getInt("highscore", /* default*/ 0);
+
         mp = MediaPlayer.create(this, R.raw.jeopardy);
         mp.start();
     }
